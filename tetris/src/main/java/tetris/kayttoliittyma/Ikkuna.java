@@ -10,12 +10,12 @@ import tetris.maailma.Palikka;
 
 public class Ikkuna extends JPanel {
 
-    private ArrayList<Palikka> palikat;
+    private ArrayList<Pelipalikka> pelipalikat;
     private Pelipalikka pelipalikka;
 
     public Ikkuna(Maailma maailma) {
         super.setBackground(Color.BLACK);
-        this.palikat = new ArrayList<Palikka>(maailma.getPalikat());
+        this.pelipalikat = new ArrayList<Pelipalikka>(maailma.getPelipalikat());
         this.pelipalikka = maailma.getPelipalikka();
     }
 
@@ -23,17 +23,26 @@ public class Ikkuna extends JPanel {
     public void paint(Graphics g) {
         super.paint(g);
 
-        //tehään silleen et palat luodaan aina samankokosista neliöistä. hitboxien
-        //tarkkailu helpottuu huomattavasti. 
-        
-        String muoto = pelipalikka.getMuoto();
-        if (muoto.equals("L")) {
-            g.setColor(Color.cyan);
-            
+        for (Pelipalikka palikka : pelipalikat) {
+            if (palikka.getMuoto().equals("L")) {
+                piirraL(g, palikka.getVari(), palikka.getX(), palikka.getY());
+            }
         }
-        g.setColor(Color.cyan);
-        g.fillRect(pelipalikka.getX(), pelipalikka.getY(), 15, 50);
-        g.fillRect(pelipalikka.getX(), pelipalikka.getY(), 35, 15);
+        if (pelipalikka.getMuoto().equals("L")) {
+            piirraL(g, pelipalikka.getVari(),pelipalikka.getX(), pelipalikka.getY());
+        }
 
+    }
+
+    public void paivitaPalikat(ArrayList palikat) {
+        pelipalikat = palikat;
+    }
+
+    public void piirraL(Graphics g, Color vari, int x, int y) {
+        g.setColor(vari);
+        g.fillRect(x, y, 20, 20);
+        g.fillRect(x + 20, y, 20, 20);
+        g.fillRect(x, y + 20, 20, 20);
+        g.fillRect(x, y + 40, 20, 20);
     }
 }

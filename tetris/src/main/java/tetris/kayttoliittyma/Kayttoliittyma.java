@@ -4,6 +4,7 @@ package tetris.kayttoliittyma;
 import tetris.maailma.Maailma;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
  
@@ -37,11 +38,11 @@ public class Kayttoliittyma implements Runnable {
         container.add(ikkuna);
     }
  
-    public void piirra() {
+    public void piirra(ArrayList palikat) {
         if (ikkuna == null) {
             return;
         }
- 
+        ikkuna.paivitaPalikat(palikat);
         ikkuna.repaint();
     }
  

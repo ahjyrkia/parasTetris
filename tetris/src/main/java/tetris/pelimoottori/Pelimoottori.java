@@ -17,10 +17,11 @@ public class Pelimoottori extends Thread {
  
     public void paivita() {
         maailma.liikuta();
+        
     }
  
     public void piirra() {
-        kayttoliittyma.piirra();
+        kayttoliittyma.piirra(maailma.getPelipalikat());
     }
  
     @Override

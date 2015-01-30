@@ -1,17 +1,24 @@
 package tetris.maailma;
 
+import java.util.HashMap;
 import java.util.Random;
  
 public class Palikka {
  
     private int x;
     private int y;
-    private int halkaisija;
+    
+    private HashMap<Integer, Integer> neliot = new HashMap<Integer, Integer>();
+    private String muoto;
  
-    public Palikka(int x, int y, int halkaisija) {
+    public Palikka(int x, int y, String muoto) {
         this.x = x;
         this.y = y;
-        this.halkaisija = halkaisija;
+        this.muoto = muoto;
+        
+    }
+    public String getMuoto() {
+        return muoto;
     }
  
     public void setX(int x) {
@@ -26,9 +33,6 @@ public class Palikka {
         return y;
     }
  
-    public int getHalkaisija() {
-        return halkaisija;
-    }
  
     public void liiku() {
       

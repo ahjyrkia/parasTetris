@@ -37,11 +37,11 @@ public class MaailmaTest {
     public void tearDown() {
     }
 
-    @Test
-    public void nopeutuukoJosNopeuttaa() {
-        Maailma maailma = new Maailma();
-        maailma.nopeuta();
-        assertEquals(maailma.getNopeus(), 2);
-    }
+//    @Test
+//    public void nopeutuukoJosNopeuttaa() {
+//        Maailma maailma = new Maailma();
+//        maailma.nopeuta();
+//        assertEquals(maailma.getNopeus(), 2);
+//    }
 
 }

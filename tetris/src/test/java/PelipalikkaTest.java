@@ -1,4 +1,5 @@
 
+import java.awt.Color;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -34,7 +35,7 @@ public class PelipalikkaTest {
 
     @Test
     public void liikkuuOikeinOikealle() {
-        Pelipalikka palikka = new Pelipalikka(50, 50);
+        Pelipalikka palikka = new Pelipalikka(50, 50, "L", Color.GREEN);
         palikka.liikeKoordinaattienMuutos("right");
         palikka.liiku();
         assertEquals(70, palikka.getX());
@@ -42,7 +43,7 @@ public class PelipalikkaTest {
 
     @Test
     public void liikkuuOikeinVasemmalle() {
-        Pelipalikka palikka = new Pelipalikka(50, 50);
+        Pelipalikka palikka = new Pelipalikka(50, 50, "L", Color.GREEN);
         palikka.liikeKoordinaattienMuutos("left");
         palikka.liiku();
         assertEquals(30, palikka.getX());
@@ -50,23 +51,23 @@ public class PelipalikkaTest {
 
     @Test
     public void liikkuuOikeinAlas() {
-        Pelipalikka palikka = new Pelipalikka(50, 50);
+        Pelipalikka palikka = new Pelipalikka(50, 50, "L", Color.GREEN);
         palikka.liikeKoordinaattienMuutos("down");
         palikka.liiku();
-        assertEquals(70, palikka.getY());
+        assertEquals(71, palikka.getY());
     }
 
     @Test
     public void liikkuuOikeinYlos() {
-        Pelipalikka palikka = new Pelipalikka(50, 50);
+        Pelipalikka palikka = new Pelipalikka(50, 50, "L", Color.GREEN);
         palikka.liikeKoordinaattienMuutos("up");
         palikka.liiku();
-        assertEquals(30, palikka.getY());
+        assertEquals(31, palikka.getY());
     }
 
     @Test
     public void eiMeneVasemmastaSeinastaLapi() {
-        Pelipalikka palikka = new Pelipalikka(10, 50);
+        Pelipalikka palikka = new Pelipalikka(10, 50, "L", Color.GREEN);
         palikka.liikeKoordinaattienMuutos("left");
         palikka.liiku();
         assertEquals(0, palikka.getX());
@@ -74,12 +75,23 @@ public class PelipalikkaTest {
 
     @Test
     public void eiMeneVielakaanVasemmastaSeinastaLapi() {
-        Pelipalikka palikka = new Pelipalikka(10, 50);
+        Pelipalikka palikka = new Pelipalikka(10, 50, "L", Color.GREEN);
         palikka.liikeKoordinaattienMuutos("left");
         palikka.liiku();
         palikka.liikeKoordinaattienMuutos("left");
         palikka.liiku();
         assertEquals(0, palikka.getX());
     }
+    @Test
+    public void eiMeneLattiastaLapi() {
+        Pelipalikka palikka = new Pelipalikka(50, 450, "L", Color.GREEN);
+        palikka.liikeKoordinaattienMuutos("down");
+        palikka.liikeKoordinaattienMuutos("down");
 
+        boolean b = false;
+        if (palikka.getY() < 500) {
+            b = true;
+        }
+        assertTrue(b);
+    }
 }
