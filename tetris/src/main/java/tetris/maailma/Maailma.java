@@ -30,7 +30,7 @@ public class Maailma {
             pelipalikka.setY(-50);
             pelipalikka.setX(200);
             Random r = new Random();
-            pelipalikka.setVari(varit.get(r.nextInt(5)));
+            pelipalikka.setVari(varit.get(r.nextInt(7)));
             System.out.println("meni tänne");
         }
         pelipalikka.liiku();
@@ -43,6 +43,7 @@ public class Maailma {
         varit.add(Color.GREEN);
         varit.add(Color.YELLOW);
         varit.add(Color.WHITE);
+        varit.add(Color.ORANGE);
     }
 
     public Pelipalikka getPelipalikka() {

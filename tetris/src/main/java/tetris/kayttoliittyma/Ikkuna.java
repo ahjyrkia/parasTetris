@@ -10,12 +10,12 @@ import tetris.maailma.Palikka;
 
 public class Ikkuna extends JPanel {
 
-    private ArrayList<Pelipalikka> pelipalikat;
+    private ArrayList<Pelipalikka> peliPalikat;
     private Pelipalikka pelipalikka;
 
     public Ikkuna(Maailma maailma) {
         super.setBackground(Color.BLACK);
-        this.pelipalikat = new ArrayList<Pelipalikka>(maailma.getPelipalikat());
+        this.peliPalikat = new ArrayList<Pelipalikka>(maailma.getPelipalikat());
         this.pelipalikka = maailma.getPelipalikka();
     }
 
@@ -23,7 +23,7 @@ public class Ikkuna extends JPanel {
     public void paint(Graphics g) {
         super.paint(g);
 
-        for (Pelipalikka palikka : pelipalikat) {
+        for (Pelipalikka palikka : peliPalikat) {
             if (palikka.getMuoto().equals("L")) {
                 piirraL(g, palikka.getVari(), palikka.getX(), palikka.getY());
             }
@@ -35,7 +35,7 @@ public class Ikkuna extends JPanel {
     }
 
     public void paivitaPalikat(ArrayList palikat) {
-        pelipalikat = palikat;
+        peliPalikat = palikat;
     }
 
     public void piirraL(Graphics g, Color vari, int x, int y) {
