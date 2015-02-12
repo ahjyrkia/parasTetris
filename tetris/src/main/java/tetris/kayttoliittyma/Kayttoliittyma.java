@@ -7,7 +7,7 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
- 
+
 public class Kayttoliittyma implements Runnable {
  
     private JFrame frame;

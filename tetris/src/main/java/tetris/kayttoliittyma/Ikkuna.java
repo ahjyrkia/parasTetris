@@ -8,14 +8,17 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import tetris.maailma.Palikka;
 
+/*
+* Graafisen puolen piirtäminen tapahtuu täällä.
+*/
 public class Ikkuna extends JPanel {
 
-    private ArrayList<Pelipalikka> peliPalikat;
+    private ArrayList<Palikka> peliPalikat;
     private Pelipalikka pelipalikka;
 
     public Ikkuna(Maailma maailma) {
         super.setBackground(Color.BLACK);
-        this.peliPalikat = new ArrayList<Pelipalikka>(maailma.getPelipalikat());
+        this.peliPalikat = new ArrayList<Palikka>(maailma.getPelipalikat());
         this.pelipalikka = maailma.getPelipalikka();
     }
 
@@ -23,13 +26,12 @@ public class Ikkuna extends JPanel {
     public void paint(Graphics g) {
         super.paint(g);
 
-        for (Pelipalikka palikka : peliPalikat) {
-            if (palikka.getMuoto().equals("L")) {
-                piirraL(g, palikka.getVari(), palikka.getX(), palikka.getY());
-            }
+        for (Palikka palikka : peliPalikat) {
+            g.setColor(palikka.getVari());
+            g.fillRect(palikka.getX(), palikka.getY(), 20, 20);
         }
         if (pelipalikka.getMuoto().equals("L")) {
-            piirraL(g, pelipalikka.getVari(),pelipalikka.getX(), pelipalikka.getY());
+            piirraL(g, pelipalikka.getVari(), pelipalikka.getX(), pelipalikka.getY());
         }
 
     }

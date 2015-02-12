@@ -3,7 +3,9 @@ package tetris.kayttoliittyma;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import tetris.maailma.Pelipalikka;
-
+/*
+* Liikkumisen toiminnallistemisen toteuttava luokka.
+*/
 
  
 public class Nappaimistonkuuntelija implements KeyListener {

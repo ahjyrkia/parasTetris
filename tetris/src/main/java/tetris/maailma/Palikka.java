@@ -1,24 +1,30 @@
 package tetris.maailma;
 
+import java.awt.Color;
 import java.util.HashMap;
 import java.util.Random;
- 
+/*
+* Turha luokka, varmaan menee roskikseen.
+*/
 public class Palikka {
  
     private int x;
     private int y;
+    private Color vari;
     
     private HashMap<Integer, Integer> neliot = new HashMap<Integer, Integer>();
-    private String muoto;
- 
-    public Palikka(int x, int y, String muoto) {
+
+    public void tulostaKoordit() {
+        System.out.println("x:"+x+" ja "+"y:"+y);
+    }
+    public Palikka(int x, int y, Color vari) {
         this.x = x;
         this.y = y;
-        this.muoto = muoto;
+        this.vari = vari;
         
     }
-    public String getMuoto() {
-        return muoto;
+    public void setY(int y) {
+        this.y = y;
     }
  
     public void setX(int x) {
@@ -32,11 +38,10 @@ public class Palikka {
     public int getY() {
         return y;
     }
- 
- 
-    public void liiku() {
-      
-       
+    public Color getVari() {
+        return vari;
     }
+ 
+ 
  
 }

@@ -3,6 +3,10 @@ package tetris.maailma;
 import java.awt.Color;
 import java.util.ArrayList;
 
+/*
+* Pelipalikan kertoo kaiken liikutettavasta palikasta. Koordinaatit ja muodon. 
+* Täällä tapahtuu myös liikkumisen viimeinen vaihe.
+*/
 public class Pelipalikka {
 
     private int x;
@@ -11,6 +15,7 @@ public class Pelipalikka {
     private int liikeY;
     private String muoto;
     private Color vari;
+    private ArrayList<Palikka> vartalo;
 
     public Pelipalikka(int x, int y, String muoto, Color vari) {
         this.x = x;
@@ -19,6 +24,7 @@ public class Pelipalikka {
         liikeY = 0;
         this.muoto = muoto;
         this.vari = vari;
+
     }
 
     public void setX(int x) {
@@ -36,17 +42,21 @@ public class Pelipalikka {
     public int getY() {
         return y;
     }
-    
+
     public Color getVari() {
         return vari;
     }
-    
+
     public void setVari(Color vari) {
         this.vari = vari;
     }
 
-    public void liiku() {
-        
+    public void liiku(boolean saakoVasen) {
+        if (saakoVasen) {
+            if (liikeX < 0) {
+                liikeX = 0;
+            }
+        }
         x = x + liikeX;
         liikeX = 0;
 
@@ -68,11 +78,11 @@ public class Pelipalikka {
         return false;
     }
 
-    public boolean osuukoPalikkaan(ArrayList<Pelipalikka> palikat) {
-        for (Pelipalikka p : palikat) {
-            
+    public int getAlinKohta() {
+        if (muoto.equals("L")) {
+            return y + 60;
         }
-        return false;
+        return -1;
     }
 
     public void liikeKoordinaattienMuutos(String mihin) {
@@ -90,13 +100,15 @@ public class Pelipalikka {
         }
         if (mihin.equals("down")) {
             if (y < 420) { // tilapäinen ratkasu
-            liikeY += 20;
+                liikeY += 20;
             }
         }
 
     }
 
+
+
     public String getMuoto() {
-        return "L";
+        return muoto;
     }
 }
