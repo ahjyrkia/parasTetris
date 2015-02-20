@@ -21,7 +21,7 @@ public class Pelimoottori extends Thread {
     }
  
     public void piirra() {
-        kayttoliittyma.piirra(maailma.getPelipalikat());
+        kayttoliittyma.piirra(maailma.getPysahtyneetPalikat());
     }
  
     @Override

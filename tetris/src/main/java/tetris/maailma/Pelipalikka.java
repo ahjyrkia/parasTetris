@@ -4,9 +4,9 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 /*
-* Pelipalikan kertoo kaiken liikutettavasta palikasta. Koordinaatit ja muodon. 
-* Täällä tapahtuu myös liikkumisen viimeinen vaihe.
-*/
+ * Pelipalikan kertoo kaiken liikutettavasta palikasta. Koordinaatit ja muodon. 
+ * Täällä tapahtuu myös liikkumisen viimeinen vaihe.
+ */
 public class Pelipalikka {
 
     private int x;
@@ -15,7 +15,6 @@ public class Pelipalikka {
     private int liikeY;
     private String muoto;
     private Color vari;
-    private ArrayList<Palikka> vartalo;
 
     public Pelipalikka(int x, int y, String muoto, Color vari) {
         this.x = x;
@@ -51,16 +50,26 @@ public class Pelipalikka {
         this.vari = vari;
     }
 
-    public void liiku(boolean saakoVasen) {
+    public void liiku(boolean saakoVasen, boolean saakoOikea, boolean saakoAlas, boolean loppuukoKeuliminen) {
         if (saakoVasen) {
             if (liikeX < 0) {
                 liikeX = 0;
             }
         }
+        if (saakoOikea) {
+            if (liikeX > 0) {
+                liikeX = 0;
+            }
+        }
         x = x + liikeX;
         liikeX = 0;
-
-        y = y + liikeY + 1;
+        if (!saakoAlas) {
+            y = y + 1;
+        }
+        if (loppuukoKeuliminen) {
+            liikeY = 0;
+        }
+        y = y + liikeY;
         liikeY = 0;
 
         if (this.x < 0) {
@@ -99,14 +108,14 @@ public class Pelipalikka {
 
         }
         if (mihin.equals("down")) {
-            if (y < 420) { // tilapäinen ratkasu
-                liikeY += 20;
-            }
+            liikeY += 20;
         }
 
     }
 
-
+    public void setMuoto(String muoto) {
+        this.muoto = muoto;
+    }
 
     public String getMuoto() {
         return muoto;
