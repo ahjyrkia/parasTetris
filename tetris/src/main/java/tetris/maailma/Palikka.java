@@ -12,11 +12,6 @@ public class Palikka {
     private int y;
     private Color vari;
     
-    private HashMap<Integer, Integer> neliot = new HashMap<Integer, Integer>();
-
-    public void tulostaKoordit() {
-        System.out.println("x:"+x+" ja "+"y:"+y);
-    }
     public Palikka(int x, int y, Color vari) {
         this.x = x;
         this.y = y;

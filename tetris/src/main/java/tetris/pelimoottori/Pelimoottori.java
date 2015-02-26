@@ -39,7 +39,7 @@ public class Pelimoottori extends Thread {
  
     public void odota() {
         try {
-            Thread.sleep(1000 / 60);
+            Thread.sleep(1000 / 100);
         } catch (InterruptedException e) {
             e.printStackTrace();
             System.exit(0);

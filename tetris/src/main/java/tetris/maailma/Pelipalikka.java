@@ -15,6 +15,12 @@ public class Pelipalikka {
     private int liikeY;
     private String muoto;
     private Color vari;
+    private int score;
+    private String seuraavaMuoto;
+    private Color seuraavaVari;
+    private boolean gameOver;
+    private boolean pause;
+    private int kyltinVilkkumisMuuttuja;
 
     public Pelipalikka(int x, int y, String muoto, Color vari) {
         this.x = x;
@@ -23,7 +29,10 @@ public class Pelipalikka {
         liikeY = 0;
         this.muoto = muoto;
         this.vari = vari;
-
+        score = 0;
+        gameOver = false;
+        pause = false;
+        kyltinVilkkumisMuuttuja = 0;
     }
 
     public void setX(int x) {
@@ -63,7 +72,7 @@ public class Pelipalikka {
         }
         x = x + liikeX;
         liikeX = 0;
-        if (!saakoAlas) {
+        if (!saakoAlas && !pause) {
             y = y + 1;
         }
         if (loppuukoKeuliminen) {
@@ -71,27 +80,8 @@ public class Pelipalikka {
         }
         y = y + liikeY;
         liikeY = 0;
-
-        if (this.x < 0) {
-            setX(0);
-        }
-
-    }
-
-    public boolean osuukoLattiaan() {
-        if (getMuoto().equals("L")) {
-            if (y + 60 > 500) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public int getAlinKohta() {
-        if (muoto.equals("L")) {
-            return y + 60;
-        }
-        return -1;
+        hoidaReunanYlitykset();
+        
     }
 
     public void liikeKoordinaattienMuutos(String mihin) {
@@ -103,14 +93,69 @@ public class Pelipalikka {
             liikeX -= 20;
 
         }
-        if (mihin.equals("up")) {
-            liikeY -= 20;
-
-        }
         if (mihin.equals("down")) {
             liikeY += 20;
         }
 
+    }
+
+    public void kaannaPalikkaa() {
+        while (true) {
+            if (muoto.equals("L")) {
+                muoto = "L2";
+                break;
+            }
+            if (muoto.equals("L2")) {
+                muoto = "L3";
+                break;
+            }
+            if (muoto.equals("L3")) {
+                muoto = "L4";
+                break;
+            }
+            if (muoto.equals("L4")) {
+                muoto = "L";
+                break;
+            }
+            if (muoto.equals("SUORA")) {
+                muoto = "SUORA2";
+                break;
+            }
+            if (muoto.equals("SUORA2")) {
+                muoto = "SUORA";
+                break;
+            }
+            if (muoto.equals("NELIO")) {
+                muoto = "NELIO";
+                break;
+            }
+        }
+    }
+
+    public void hoidaReunanYlitykset() {
+        if (muoto.equals("L") || muoto.equals("NELIO") || muoto.equals("L3")) {
+            if (x + 40 > 400) {
+                setX(360);
+            }
+        }
+        if (muoto.equals("SUORA2")) {
+            if (x + 20 > 400) {
+                setX(380);
+            }
+        }
+        if (muoto.equals("L2") || muoto.equals("L4")) {
+            if (x + 60 > 400) {
+                setX(340);
+            }
+        }
+        if (muoto.equals("SUORA")) {
+            if (x + 80 > 400) {
+                setX(320);
+            }
+        }
+        if (this.x < 0) {
+            setX(0);
+        }
     }
 
     public void setMuoto(String muoto) {
@@ -120,4 +165,54 @@ public class Pelipalikka {
     public String getMuoto() {
         return muoto;
     }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setSeuraavaMuoto(String seuraava) {
+        seuraavaMuoto = seuraava;
+    }
+
+    public String getSeuraavaMuoto() {
+        return seuraavaMuoto;
+    }
+
+    public void setSeuraavaVari(Color vari) {
+        seuraavaVari = vari;
+    }
+    public Color getSeuraavaVari() {
+        return seuraavaVari;
+    }
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
+    }
+    public boolean getGameover() {
+        return gameOver;
+    }
+    public void pause() {
+        if (pause) {
+            pause = false;
+        } else {
+            pause = true;
+        }
+    }
+    public boolean getPause() {
+        return pause;
+    }
+    public void kyltinVilkkumisMuuttuja() {
+        if (kyltinVilkkumisMuuttuja == 0) {
+            kyltinVilkkumisMuuttuja = 1;
+        } else {
+            kyltinVilkkumisMuuttuja = 0;
+        }
+    }
+    public int kyltinVari() {
+        return kyltinVilkkumisMuuttuja;
+    }
+    
 }

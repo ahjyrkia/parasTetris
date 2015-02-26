@@ -3,45 +3,46 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package tetris.maailma;
 
+import java.awt.Color;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import tetris.maailma.Maailma;
 
 /**
  *
  * @author ahjyrkia
  */
-public class MaailmaTest {
-
-    public MaailmaTest() {
+public class PalikkaTest {
+    
+    public PalikkaTest() {
     }
-
+    
     @BeforeClass
     public static void setUpClass() {
     }
-
+    
     @AfterClass
     public static void tearDownClass() {
     }
-
+    
     @Before
     public void setUp() {
     }
-
+    
     @After
     public void tearDown() {
     }
 
-//    @Test
-//    public void nopeutuukoJosNopeuttaa() {
-//        Maailma maailma = new Maailma();
-//        maailma.nopeuta();
-//        assertEquals(maailma.getNopeus(), 2);
-//    }
-
+    @Test
+    public void kaikkiToimiiKunPalikkaLuodaan() {
+        Palikka palikka = new Palikka(10,10,Color.red);
+        assertEquals(palikka.getX(), 10);
+        assertEquals(palikka.getY(), 10);
+        assertEquals(palikka.getVari(), Color.red);
+    }
 }
