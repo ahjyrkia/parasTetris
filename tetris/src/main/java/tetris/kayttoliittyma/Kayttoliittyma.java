@@ -22,12 +22,12 @@ public class Kayttoliittyma implements Runnable {
     public void run() {
         frame = new JFrame("parasTetris");
         frame.setPreferredSize(new Dimension(600, 500));
-        frame.setResizable(true);
+        frame.setResizable(false);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         luoKomponentit(frame.getContentPane());
  
-        Nappaimistonkuuntelija kuuntelija = new Nappaimistonkuuntelija(maailma.getPelipalikka());
+        Nappaimistonkuuntelija kuuntelija = new Nappaimistonkuuntelija(maailma.getPelipalikka(), frame, maailma);
         frame.addKeyListener(kuuntelija);
          
         frame.pack();

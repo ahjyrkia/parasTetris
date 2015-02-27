@@ -2,7 +2,12 @@ package tetris.kayttoliittyma;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import tetris.maailma.Maailma;
 import tetris.maailma.Pelipalikka;
+import tetris.paaohjelma.Main;
+import tetris.pelimoottori.Pelimoottori;
 /*
  * Liikkumisen toiminnallistemisen toteuttava luokka.
  */
@@ -10,9 +15,13 @@ import tetris.maailma.Pelipalikka;
 public class Nappaimistonkuuntelija implements KeyListener {
 
     private Pelipalikka pelipalikka;
+    private JFrame frame;
+    private Maailma maailma;
 
-    public Nappaimistonkuuntelija(Pelipalikka pelihahmo) {
+    public Nappaimistonkuuntelija(Pelipalikka pelihahmo, JFrame frame, Maailma maailma) {
         this.pelipalikka = pelihahmo;
+        this.frame = frame;
+        this.maailma = maailma;
     }
 
     @Override
@@ -35,6 +44,18 @@ public class Nappaimistonkuuntelija implements KeyListener {
         }
         if (e.getKeyCode() == KeyEvent.VK_P) {
             pelipalikka.pause();
+        }
+        if (e.getKeyCode() == KeyEvent.VK_Q) {
+            System.exit(0);
+        }
+        if (e.getKeyCode() == KeyEvent.VK_R) {
+            frame.dispose();
+            Maailma pelimaailma = new Maailma();
+            Kayttoliittyma kayttoliittyma = new Kayttoliittyma(pelimaailma);
+            SwingUtilities.invokeLater(kayttoliittyma);
+            Pelimoottori moottori = new Pelimoottori(kayttoliittyma, pelimaailma);
+            moottori.start();
+
         }
 
     }

@@ -19,12 +19,14 @@ public class Maailma {
     private String seuraavaMuoto = "";
     private Color seuraavaVari;
     private boolean pause;
+
     /**
      * Luodaan ensimmäinen palikka, asetetaan pausen arvoksi false ja luodaan
      * värit.
      */
     public Maailma() {
-        this.pelipalikka = new Pelipalikka(200, -50, "L", Color.GREEN);
+        seuraavaMuoto();
+        this.pelipalikka = new Pelipalikka(200, -50, seuraavaMuoto, Color.GREEN);
         this.pysahtyneetPalikat = new ArrayList<Palikka>();
         varit = new ArrayList<Color>();
         luoVarit();
@@ -113,6 +115,12 @@ public class Maailma {
             pysahtyneetPalikat.add(new Palikka(pelipalikka.getX(), pelipalikka.getY() - 20, pelipalikka.getVari()));
             pysahtyneetPalikat.add(new Palikka(pelipalikka.getX(), pelipalikka.getY() - 40, pelipalikka.getVari()));
             pysahtyneetPalikat.add(new Palikka(pelipalikka.getX(), pelipalikka.getY() - 60, pelipalikka.getVari()));
+        }
+        if (pelipalikka.getMuoto().equals("KOLMIO")) {
+            pysahtyneetPalikat.add(new Palikka(pelipalikka.getX(), pelipalikka.getY(), pelipalikka.getVari()));
+            pysahtyneetPalikat.add(new Palikka(pelipalikka.getX(), pelipalikka.getY() + 20, pelipalikka.getVari()));
+            pysahtyneetPalikat.add(new Palikka(pelipalikka.getX() - 20, pelipalikka.getY() + 20, pelipalikka.getVari()));
+            pysahtyneetPalikat.add(new Palikka(pelipalikka.getX() + 20, pelipalikka.getY() + 20, pelipalikka.getVari()));
         }
     }
 
@@ -218,7 +226,7 @@ public class Maailma {
         varit.add(Color.CYAN);
         varit.add(Color.GREEN);
         varit.add(Color.YELLOW);
-        varit.add(Color.WHITE);
+        varit.add(Color.lightGray);
         varit.add(Color.ORANGE);
         varit.add(Color.PINK);
         varit.add(Color.magenta);
@@ -228,7 +236,7 @@ public class Maailma {
      * Palauttaa listan palikoista, jotka muodostavat pelipalikan sen hetkisen
      * alueen. Käytetään pysähtyneiden palikoiden luomiseen.
      *
-     * @return 
+     * @return
      */
     public ArrayList kutsuPelipalikat() {
         ArrayList<Palikka> lista = new ArrayList<Palikka>();
@@ -274,9 +282,28 @@ public class Maailma {
             lista.add(new Palikka(pelipalikka.getX(), pelipalikka.getY() - 40, pelipalikka.getVari()));
             lista.add(new Palikka(pelipalikka.getX(), pelipalikka.getY() - 60, pelipalikka.getVari()));
         }
+        if (pelipalikka.getMuoto().equals("KOLMIO")) {
+            lista.add(new Palikka(pelipalikka.getX(), pelipalikka.getY(), pelipalikka.getVari()));
+            lista.add(new Palikka(pelipalikka.getX(), pelipalikka.getY() + 20, pelipalikka.getVari()));
+            lista.add(new Palikka(pelipalikka.getX() + 20, pelipalikka.getY() + 20, pelipalikka.getVari()));
+            lista.add(new Palikka(pelipalikka.getX() - 20, pelipalikka.getY() + 20, pelipalikka.getVari()));
+        }
+        if (pelipalikka.getMuoto().equals("KOLMIO0000")) {
+            lista.add(new Palikka(pelipalikka.getX(), pelipalikka.getY(), pelipalikka.getVari()));
+            lista.add(new Palikka(pelipalikka.getX(), pelipalikka.getY(), pelipalikka.getVari()));
+            lista.add(new Palikka(pelipalikka.getX(), pelipalikka.getY(), pelipalikka.getVari()));
+            lista.add(new Palikka(pelipalikka.getX(), pelipalikka.getY(), pelipalikka.getVari()));
+        }
+        if (pelipalikka.getMuoto().equals("KOLMIO0000")) {
+            lista.add(new Palikka(pelipalikka.getX(), pelipalikka.getY(), pelipalikka.getVari()));
+            lista.add(new Palikka(pelipalikka.getX(), pelipalikka.getY(), pelipalikka.getVari()));
+            lista.add(new Palikka(pelipalikka.getX(), pelipalikka.getY(), pelipalikka.getVari()));
+            lista.add(new Palikka(pelipalikka.getX(), pelipalikka.getY(), pelipalikka.getVari()));
+        }
 
         return lista;
     }
+
     /**
      * Poistaa täydet rivit ruudulta ja antaa pisteytä sen mukaan.
      */
@@ -301,9 +328,11 @@ public class Maailma {
         score += 200 * pisteytys;
         pelipalikka.setScore(score);
     }
+
     /**
      * Siirtää tiettyjä pysähtyneitä(kuolleita) palikoita alaspäin palikoiden
      * poistuessa niiden alta.
+     *
      * @param mistaYlospain Poistettavan rivin rivinumero minkä yläpuolelta
      * palikoita liikutetaan.
      */
@@ -314,6 +343,7 @@ public class Maailma {
             }
         }
     }
+
     /**
      * Arpoo seuraavan värin.
      */
@@ -321,12 +351,14 @@ public class Maailma {
         Random r = new Random();
         seuraavaVari = varit.get(r.nextInt(9));
     }
+
     /**
      * Arpoo seuraavan muodon.
      */
     public void seuraavaMuoto() {
         Random r = new Random();
         int luku = r.nextInt(3);
+//        luku = 4;
         if (luku == 2) {
             seuraavaMuoto = "NELIO";
         }
@@ -336,6 +368,9 @@ public class Maailma {
         if (luku == 0) {
             seuraavaMuoto = "SUORA";
         }
+//        if (luku == 4) {
+//            seuraavaMuoto = "KOLMIO";
+//        }
     }
 
     public void setMuoto() {

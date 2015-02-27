@@ -5,14 +5,12 @@ import tetris.maailma.Pelipalikka;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -53,9 +51,11 @@ public class Ikkuna extends JPanel {
         g.drawString("next:", 415, 200);
         g.setFont(new Font("TimesRoman", Font.PLAIN, 12));
         g.drawString("P = pause", 411, 270);
-        g.drawString("left/right arrow = move", 411, 300);
+        g.drawString("Q = quit", 411, 285);
+        g.drawString("R = restart", 411, 300);
+        g.drawString("left/right arrow = move", 411, 315);
         g.drawString("up arrow = rotate", 411, 330);
-        g.drawString("down arrow = speed up", 411, 360);
+        g.drawString("down arrow = speed up", 411, 345);
 
         g.setColor(Color.blue);
         g.fillRect(400, 0, 200, 5);
@@ -92,6 +92,10 @@ public class Ikkuna extends JPanel {
         if (pelipalikka.getMuoto().equals("SUORA2")) {
             piirraSUORA2(g, pelipalikka.getVari(), pelipalikka.getX(), pelipalikka.getY());
         }
+        if (pelipalikka.getMuoto().equals("KOLMIO")) {
+            piirraKOLMIO(g, pelipalikka.getVari(), pelipalikka.getX(), pelipalikka.getY());
+
+        }
         if (pelipalikka.getGameover()) {
             g.setFont(new Font("TimesRoman", Font.PLAIN, 50));
             g.setColor(Color.red);
@@ -99,30 +103,40 @@ public class Ikkuna extends JPanel {
             g.setColor(Color.white);
             g.setFont(new Font("TimesRoman", Font.PLAIN, 40));
             g.drawString(score, 110, 250);
+            if (tiedostonkirjoitusapumuuttuja == 0) {
+                scorenTalletus();
+            }
+
         }
         if (pelipalikka.getPause()) {
             g.setFont(new Font("TimesRoman", Font.PLAIN, 25));
             g.setColor(Color.white);
             g.drawString("PRESS P TO CONTINUE ", 40, 200);
-            if (tiedostonkirjoitusapumuuttuja == 0) {
-                scorenTalletus();
-            }
+
         }
 
         try {
-            FileReader lukija = new FileReader("tiedosto.txt");
+            FileReader lukija = new FileReader("scoret.txt");
             Scanner sc = new Scanner(lukija);
-            int y = 380;
             ArrayList<Integer> scoret = new ArrayList<Integer>();
             while (sc.hasNextLine()) {
                 scoret.add(Integer.parseInt(sc.nextLine()));
             }
+            int y = 420;
+            Collections.sort(scoret);
             Collections.reverse(scoret);
-            for (int i = 0; i < 5; i++) {
-                g.setFont(new Font("TimesRoman", Font.PLAIN, 10));
-                g.setColor(Color.white);
-                g.drawString("" + scoret.get(i), 480, y);
-                y += 10;
+            g.setFont(new Font("TimesRoman", Font.PLAIN, 18));
+            g.setColor(Color.red);
+            g.drawString("top5", 415, 400);
+            g.setFont(new Font("TimesRoman", Font.PLAIN, 15));
+            g.setColor(Color.white);
+            int top5 = scoret.size();
+            if (scoret.size() > 4) {
+                top5 = 5;
+            }
+            for (int i = 0; i < top5; i++) {
+                g.drawString("" + scoret.get(i), 415, y);
+                y += 15;
 
             }
 
@@ -207,6 +221,14 @@ public class Ikkuna extends JPanel {
         g.fillRect(x, y - 60, 20, 20);
     }
 
+    private void piirraKOLMIO(Graphics g, Color vari, int x, int y) {
+        g.setColor(vari);
+        g.fillRect(x, y, 20, 20);
+        g.fillRect(x, y + 20, 20, 20);
+        g.fillRect(x - 20, y + 20, 20, 20);
+        g.fillRect(x + 20, y + 20, 20, 20);
+    }
+
     /**
      * Piirtää ruudun info-puolelle seuraavan palikan "next:" tekstin viereen.
      *
@@ -230,7 +252,7 @@ public class Ikkuna extends JPanel {
 
         try {
             tiedostonkirjoitusapumuuttuja++;
-            String filename = "tiedosto.txt";
+            String filename = "scoret.txt";
             FileWriter fw = new FileWriter(filename, true);
             fw.write(pelipalikka.getScore() + "\n");
             fw.close();
