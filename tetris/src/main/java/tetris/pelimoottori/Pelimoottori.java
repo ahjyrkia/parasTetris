@@ -14,12 +14,17 @@ public class Pelimoottori extends Thread {
         this.maailma = maailma;
         this.kaynnissa = true;
     }
- 
+    /**
+     * Muuttaa ohjelman arvoja jottai jotain liikettä tapahtuisi eli kutsuu 
+     * maailma-luokan liikuta metodia.
+     */
     public void paivita() {
         maailma.liikuta();
-        
     }
- 
+    /**
+     * Piirtää graafisen puolen. Lähettää myös aina uuden listan pysähtynteistä
+     * palikoista.
+     */
     public void piirra() {
         kayttoliittyma.piirra(maailma.getPysahtyneetPalikat());
     }
@@ -36,7 +41,9 @@ public class Pelimoottori extends Thread {
     public void sammuta() {
         kaynnissa = false;
     }
- 
+    /**
+     * Hidastaa päivittämistä jotta peli olisi ihmiselle mahdollista käyttää.
+     */
     public void odota() {
         try {
             Thread.sleep(1000 / 100);

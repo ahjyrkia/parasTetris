@@ -19,7 +19,10 @@ public class Maailma {
     private String seuraavaMuoto = "";
     private Color seuraavaVari;
     private boolean pause;
-
+    /**
+     * Luodaan ensimmäinen palikka, asetetaan pausen arvoksi false ja luodaan
+     * värit.
+     */
     public Maailma() {
         this.pelipalikka = new Pelipalikka(200, -50, "L", Color.GREEN);
         this.pysahtyneetPalikat = new ArrayList<Palikka>();
@@ -32,6 +35,11 @@ public class Maailma {
         pause = false;
     }
 
+    /**
+     * Liikuttaa palikoita mikäli ne eivät osu lattiaan tai muihin palikoihin
+     * (miinus palikannitkutus-aika). Toteuttaa myös toiminnalisuuden sen
+     * jälkeen kun palikka pysähtyy.
+     */
     public void liikuta() {
         liikkuvatPalikat = new ArrayList<Palikka>(kutsuPelipalikat());
         if (osuukoKuolleenPaalleTaiLattiaan()) {
@@ -55,6 +63,13 @@ public class Maailma {
         pelipalikka.liiku(osuukoJosLiikutaanVasemmalle(), osuukoJosLiikutaanOikealle(), osuukoKuolleenPaalleTaiLattiaan(), saakoKeuliaViela());
     }
 
+    /**
+     * Lisää pysähtyneen pelipalikan palikka-olioina pysähtyneiden palikoiden
+     * listaan.
+     *
+     * @param klooni Pelipalikan kopio mistä otetaan tiedot, joilla luodaan
+     * pysähtyneet palikat.
+     */
     public void lisaaPelipalikkaPalikoihin(Pelipalikka klooni) {
         String muoto = klooni.getMuoto();
         if (muoto.equals("L")) {
@@ -101,6 +116,10 @@ public class Maailma {
         }
     }
 
+    /**
+     * Kun pysähtynyt palikka menee ylälaidan yli muutetaan gameOver-muuttujan
+     * arvoa.
+     */
     public void tuleekoGameOver() {
         for (Palikka kuollu : pysahtyneetPalikat) {
             if (kuollu.getY() < 0) {
@@ -110,6 +129,12 @@ public class Maailma {
 
     }
 
+    /**
+     * Tarkistetaan saako vielä antaa palikalle vauhtia (speed up). Mikäli liian
+     * lähellä pysähtynyttä palikkaa palauttaa arvon true.
+     *
+     * @return Palauttaa false jos saa keulia ja true jos ei.
+     */
     public boolean saakoKeuliaViela() {
         for (Palikka liikkuva : liikkuvatPalikat) {
             if (liikkuva.getY() + 40 >= 500) {
@@ -126,6 +151,11 @@ public class Maailma {
         return false;
     }
 
+    /**
+     * Tarkistaa osuuko alaspäin mentäessä lattiaan tai palikkaan.
+     *
+     * @return Palauttaa true jos osuu ja false jos ei osu.
+     */
     public boolean osuukoKuolleenPaalleTaiLattiaan() {
         for (Palikka liikkuva : liikkuvatPalikat) {
             if (liikkuva.getY() + 20 >= 500) {
@@ -142,6 +172,11 @@ public class Maailma {
         return false;
     }
 
+    /**
+     * Tarkistaa osuuko palikkaan jos liikutaan vasemmalle.
+     *
+     * @return Palauttaa true jos osuu.
+     */
     public boolean osuukoJosLiikutaanVasemmalle() {
         for (Palikka kuollu : pysahtyneetPalikat) {
             for (Palikka liikkuva : liikkuvatPalikat) {
@@ -155,6 +190,11 @@ public class Maailma {
         return false;
     }
 
+    /**
+     * Tarkistaa osuuko palikkaan jos liikutaan oikealle.
+     *
+     * @return Palauttaa true jos osuu.
+     */
     public boolean osuukoJosLiikutaanOikealle() {
         for (Palikka kuollu : pysahtyneetPalikat) {
             for (Palikka liikkuva : liikkuvatPalikat) {
@@ -169,6 +209,9 @@ public class Maailma {
         return false;
     }
 
+    /**
+     * Luo värit ja lisää ne värilistaan.
+     */
     public void luoVarit() {
         varit.add(Color.red);
         varit.add(Color.BLUE);
@@ -181,6 +224,12 @@ public class Maailma {
         varit.add(Color.magenta);
     }
 
+    /**
+     * Palauttaa listan palikoista, jotka muodostavat pelipalikan sen hetkisen
+     * alueen. Käytetään pysähtyneiden palikoiden luomiseen.
+     *
+     * @return 
+     */
     public ArrayList kutsuPelipalikat() {
         ArrayList<Palikka> lista = new ArrayList<Palikka>();
         if (pelipalikka.getMuoto().equals("L")) {
@@ -228,7 +277,9 @@ public class Maailma {
 
         return lista;
     }
-
+    /**
+     * Poistaa täydet rivit ruudulta ja antaa pisteytä sen mukaan.
+     */
     public void poistaTaydetRivit() {
         int pisteytys = 0;
         for (int i = 480; i >= 0; i -= 20) {
@@ -250,7 +301,12 @@ public class Maailma {
         score += 200 * pisteytys;
         pelipalikka.setScore(score);
     }
-
+    /**
+     * Siirtää tiettyjä pysähtyneitä(kuolleita) palikoita alaspäin palikoiden
+     * poistuessa niiden alta.
+     * @param mistaYlospain Poistettavan rivin rivinumero minkä yläpuolelta
+     * palikoita liikutetaan.
+     */
     public void siirraKuolleitaPalikoita(int mistaYlospain) {
         for (Palikka palikka : pysahtyneetPalikat) {
             if (palikka.getY() <= mistaYlospain) {
@@ -258,12 +314,16 @@ public class Maailma {
             }
         }
     }
-
+    /**
+     * Arpoo seuraavan värin.
+     */
     public void seuraavaVari() {
         Random r = new Random();
         seuraavaVari = varit.get(r.nextInt(9));
     }
-
+    /**
+     * Arpoo seuraavan muodon.
+     */
     public void seuraavaMuoto() {
         Random r = new Random();
         int luku = r.nextInt(3);

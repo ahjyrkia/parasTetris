@@ -22,6 +22,14 @@ public class Pelipalikka {
     private boolean pause;
     private int kyltinVilkkumisMuuttuja;
 
+    /**
+     * Luodaan pelipalikka.
+     *
+     * @param x Pelipalikan x koordinaatti.
+     * @param y Pelipalikan y koordinaatti.
+     * @param muoto
+     * @param vari
+     */
     public Pelipalikka(int x, int y, String muoto, Color vari) {
         this.x = x;
         this.y = y;
@@ -59,6 +67,14 @@ public class Pelipalikka {
         this.vari = vari;
     }
 
+    /**
+     * Liikuttaa pelipalikkaa jos haluttuun suuntaan saa liikkua.
+     *
+     * @param saakoVasen
+     * @param saakoOikea
+     * @param saakoAlas
+     * @param loppuukoKeuliminen
+     */
     public void liiku(boolean saakoVasen, boolean saakoOikea, boolean saakoAlas, boolean loppuukoKeuliminen) {
         if (saakoVasen) {
             if (liikeX < 0) {
@@ -81,7 +97,7 @@ public class Pelipalikka {
         y = y + liikeY;
         liikeY = 0;
         hoidaReunanYlitykset();
-        
+
     }
 
     public void liikeKoordinaattienMuutos(String mihin) {
@@ -99,6 +115,9 @@ public class Pelipalikka {
 
     }
 
+    /**
+     * Metodi kääntää palikkaa riippuen sen nykyisestä muodosta.
+     */
     public void kaannaPalikkaa() {
         while (true) {
             if (muoto.equals("L")) {
@@ -132,6 +151,9 @@ public class Pelipalikka {
         }
     }
 
+    /**
+     * Asettaa pelipalikan takaisin reunalle mikä se yrittää mennä reunan yli.
+     */
     public void hoidaReunanYlitykset() {
         if (muoto.equals("L") || muoto.equals("NELIO") || muoto.equals("L3")) {
             if (x + 40 > 400) {
@@ -185,15 +207,21 @@ public class Pelipalikka {
     public void setSeuraavaVari(Color vari) {
         seuraavaVari = vari;
     }
+
     public Color getSeuraavaVari() {
         return seuraavaVari;
     }
+
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
     }
+
     public boolean getGameover() {
         return gameOver;
     }
+    /**
+     * Pelin pause-ominaisuuden toteuttava metodi.
+     */
     public void pause() {
         if (pause) {
             pause = false;
@@ -201,9 +229,11 @@ public class Pelipalikka {
             pause = true;
         }
     }
+
     public boolean getPause() {
         return pause;
     }
+    
     public void kyltinVilkkumisMuuttuja() {
         if (kyltinVilkkumisMuuttuja == 0) {
             kyltinVilkkumisMuuttuja = 1;
@@ -211,8 +241,9 @@ public class Pelipalikka {
             kyltinVilkkumisMuuttuja = 0;
         }
     }
+
     public int kyltinVari() {
         return kyltinVilkkumisMuuttuja;
     }
-    
+
 }

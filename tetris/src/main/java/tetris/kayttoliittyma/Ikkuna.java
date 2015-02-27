@@ -97,11 +97,21 @@ public class Ikkuna extends JPanel {
         }
 
     }
-
+    /**
+     * Päivittää pysähtyneiden palikoiden listan.
+     * @param palikat 
+     */
     public void paivitaPalikat(ArrayList palikat) {
         pysahtyneetPalikat = palikat;
     }
-
+    /**
+     * Piirtää SUORA-muotoisen palikan. Parametreina tulee väri ja koordinaatit.
+     * Sama logiikka muissa palikoiden piirtämis-metodeissa.
+     * @param g
+     * @param vari
+     * @param x
+     * @param y 
+     */
     public void piirraSUORA(Graphics g, Color vari, int x, int y) {
         g.setColor(vari);
         g.fillRect(x, y, 20, 20);
@@ -157,7 +167,12 @@ public class Ikkuna extends JPanel {
         g.fillRect(x, y - 40, 20, 20);
         g.fillRect(x, y - 60, 20, 20);
     }
-
+    /**
+     * Piirtää ruudun info-puolelle seuraavan palikan "next:" tekstin viereen.
+     * @param g
+     * @param muoto
+     * @param vari 
+     */
     private void piirraSeuraavaPalikka(Graphics g, String muoto, Color vari) {
         if (muoto.equals("SUORA")) {
             piirraSUORA(g, vari, 500, 185);
