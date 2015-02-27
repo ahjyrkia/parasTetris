@@ -148,6 +148,22 @@ public class Pelipalikka {
                 muoto = "NELIO";
                 break;
             }
+            if (muoto.equals("KOLMIO")) {
+                muoto = "KOLMIO2";
+                break;
+            }
+            if (muoto.equals("KOLMIO2")) {
+                muoto = "KOLMIO3";
+                break;
+            }
+            if (muoto.equals("KOLMIO3")) {
+                muoto = "KOLMIO4";
+                break;
+            }
+            if (muoto.equals("KOLMIO4")) {
+                muoto = "KOLMIO";
+                break;
+            }
         }
     }
 
@@ -155,7 +171,7 @@ public class Pelipalikka {
      * Asettaa pelipalikan takaisin reunalle mikä se yrittää mennä reunan yli.
      */
     public void hoidaReunanYlitykset() {
-        if (muoto.equals("L") || muoto.equals("NELIO") || muoto.equals("L3")) {
+        if (muoto.equals("L") || muoto.equals("NELIO") || muoto.equals("L3") || muoto.equals("KOLMIO2") || muoto.equals("KOLMIO4")) {
             if (x + 40 > 400) {
                 setX(360);
             }
@@ -165,7 +181,7 @@ public class Pelipalikka {
                 setX(380);
             }
         }
-        if (muoto.equals("L2") || muoto.equals("L4")) {
+        if (muoto.equals("L2") || muoto.equals("L4") || muoto.equals("KOLMIO") || muoto.equals("KOLMIO3")) {
             if (x + 60 > 400) {
                 setX(340);
             }
@@ -219,6 +235,7 @@ public class Pelipalikka {
     public boolean getGameover() {
         return gameOver;
     }
+
     /**
      * Pelin pause-ominaisuuden toteuttava metodi.
      */
@@ -233,7 +250,7 @@ public class Pelipalikka {
     public boolean getPause() {
         return pause;
     }
-    
+
     public void kyltinVilkkumisMuuttuja() {
         if (kyltinVilkkumisMuuttuja == 0) {
             kyltinVilkkumisMuuttuja = 1;

@@ -45,7 +45,7 @@ public class MaailmaTest {
     public void aloitusPelipalikkaOnOlemassa() {
         Maailma maailma = new Maailma();
         Pelipalikka pelipalikka = new Pelipalikka(200, -50, "L", Color.GREEN);
-        assertEquals(pelipalikka.getMuoto(), maailma.getPelipalikka().getMuoto());
+        assertNotSame(null, maailma.getPelipalikka());
     }
 
     @Test
@@ -72,12 +72,12 @@ public class MaailmaTest {
     }
 
     @Test
-    public void pelipalikkaSiirtyyAloitusPaikkaanKunOsuuLattiaan() {
+    public void pelipalikkaAloittaaAlustaKunOsuuLattiaan() {
         Maailma maailma = new Maailma();
-        for (int i = 0; i < 590; i++) {
+        for (int i = 0; i < 600; i++) {
             maailma.liikuta();
         }
-        assertEquals(-50, maailma.getPelipalikka().getY());
+        assertNotSame(400, maailma.getPelipalikka().getY());
     }
 
     @Test

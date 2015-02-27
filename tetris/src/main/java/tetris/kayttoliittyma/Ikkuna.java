@@ -5,6 +5,7 @@ import tetris.maailma.Pelipalikka;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -56,6 +57,9 @@ public class Ikkuna extends JPanel {
         g.drawString("left/right arrow = move", 411, 315);
         g.drawString("up arrow = rotate", 411, 330);
         g.drawString("down arrow = speed up", 411, 345);
+        g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+        g.setColor(Color.red);
+        g.drawString("top5", 415, 397);
 
         g.setColor(Color.blue);
         g.fillRect(400, 0, 200, 5);
@@ -94,7 +98,15 @@ public class Ikkuna extends JPanel {
         }
         if (pelipalikka.getMuoto().equals("KOLMIO")) {
             piirraKOLMIO(g, pelipalikka.getVari(), pelipalikka.getX(), pelipalikka.getY());
-
+        }
+        if (pelipalikka.getMuoto().equals("KOLMIO2")) {
+            piirraKOLMIO2(g, pelipalikka.getVari(), pelipalikka.getX(), pelipalikka.getY());
+        }
+        if (pelipalikka.getMuoto().equals("KOLMIO3")) {
+            piirraKOLMIO3(g, pelipalikka.getVari(), pelipalikka.getX(), pelipalikka.getY());
+        }
+        if (pelipalikka.getMuoto().equals("KOLMIO4")) {
+            piirraKOLMIO4(g, pelipalikka.getVari(), pelipalikka.getX(), pelipalikka.getY());
         }
         if (pelipalikka.getGameover()) {
             g.setFont(new Font("TimesRoman", Font.PLAIN, 50));
@@ -115,34 +127,36 @@ public class Ikkuna extends JPanel {
 
         }
 
-        try {
-            FileReader lukija = new FileReader("scoret.txt");
-            Scanner sc = new Scanner(lukija);
-            ArrayList<Integer> scoret = new ArrayList<Integer>();
-            while (sc.hasNextLine()) {
-                scoret.add(Integer.parseInt(sc.nextLine()));
-            }
-            int y = 420;
-            Collections.sort(scoret);
-            Collections.reverse(scoret);
-            g.setFont(new Font("TimesRoman", Font.PLAIN, 18));
-            g.setColor(Color.red);
-            g.drawString("top5", 415, 400);
-            g.setFont(new Font("TimesRoman", Font.PLAIN, 15));
-            g.setColor(Color.white);
-            int top5 = scoret.size();
-            if (scoret.size() > 4) {
-                top5 = 5;
-            }
-            for (int i = 0; i < top5; i++) {
-                g.drawString("" + scoret.get(i), 415, y);
-                y += 15;
+        if (new File("scoret.txt").isFile()) {
+            try {
+                FileReader lukija = new FileReader("scoret.txt");
+                Scanner sc = new Scanner(lukija);
+                ArrayList<Integer> scoret = new ArrayList<Integer>();
+                while (sc.hasNextLine()) {
+                    scoret.add(Integer.parseInt(sc.nextLine()));
+                }
+                int y = 420;
+                Collections.sort(scoret);
+                Collections.reverse(scoret);
 
-            }
+                g.setFont(new Font("TimesRoman", Font.PLAIN, 15));
+                g.setColor(Color.white);
+                int top5 = scoret.size();
+                if (scoret.size() > 4) {
+                    top5 = 5;
+                }
+                int sija = 1;
+                for (int i = 0; i < top5; i++) {
+                    g.drawString(sija+".   " + scoret.get(i), 415, y);
+                    y += 15;
+                    sija++;
 
-            sc.close();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Ikkuna.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                sc.close();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Ikkuna.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }
@@ -224,9 +238,33 @@ public class Ikkuna extends JPanel {
     private void piirraKOLMIO(Graphics g, Color vari, int x, int y) {
         g.setColor(vari);
         g.fillRect(x, y, 20, 20);
-        g.fillRect(x, y + 20, 20, 20);
-        g.fillRect(x - 20, y + 20, 20, 20);
-        g.fillRect(x + 20, y + 20, 20, 20);
+        g.fillRect(x + 20, y, 20, 20);
+        g.fillRect(x + 40, y, 20, 20);
+        g.fillRect(x + 20, y - 20, 20, 20);
+    }
+
+    private void piirraKOLMIO2(Graphics g, Color vari, int x, int y) {
+        g.setColor(vari);
+        g.fillRect(x, y - 20, 20, 20);
+        g.fillRect(x + 20, y, 20, 20);
+        g.fillRect(x + 20, y - 20, 20, 20);
+        g.fillRect(x + 20, y - 40, 20, 20);
+    }
+
+    private void piirraKOLMIO3(Graphics g, Color vari, int x, int y) {
+        g.setColor(vari);
+        g.fillRect(x, y - 20, 20, 20);
+        g.fillRect(x + 20, y, 20, 20);
+        g.fillRect(x + 20, y - 20, 20, 20);
+        g.fillRect(x + 40, y - 20, 20, 20);
+    }
+
+    private void piirraKOLMIO4(Graphics g, Color vari, int x, int y) {
+        g.setColor(vari);
+        g.fillRect(x, y, 20, 20);
+        g.fillRect(x, y - 20, 20, 20);
+        g.fillRect(x, y - 40, 20, 20);
+        g.fillRect(x + 20, y - 20, 20, 20);
     }
 
     /**
@@ -246,8 +284,14 @@ public class Ikkuna extends JPanel {
         if (muoto.equals("NELIO")) {
             piirraNELIO(g, vari, 500, 185);
         }
+        if (muoto.equals("KOLMIO")) {
+            piirraKOLMIO(g, vari, 500, 185);
+        }
     }
 
+    /**
+     * Tallettaa scoret tiedostoon.
+     */
     private void scorenTalletus() {
 
         try {

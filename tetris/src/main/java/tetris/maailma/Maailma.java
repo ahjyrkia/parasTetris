@@ -118,9 +118,27 @@ public class Maailma {
         }
         if (pelipalikka.getMuoto().equals("KOLMIO")) {
             pysahtyneetPalikat.add(new Palikka(pelipalikka.getX(), pelipalikka.getY(), pelipalikka.getVari()));
-            pysahtyneetPalikat.add(new Palikka(pelipalikka.getX(), pelipalikka.getY() + 20, pelipalikka.getVari()));
-            pysahtyneetPalikat.add(new Palikka(pelipalikka.getX() - 20, pelipalikka.getY() + 20, pelipalikka.getVari()));
-            pysahtyneetPalikat.add(new Palikka(pelipalikka.getX() + 20, pelipalikka.getY() + 20, pelipalikka.getVari()));
+            pysahtyneetPalikat.add(new Palikka(pelipalikka.getX() + 20, pelipalikka.getY(), pelipalikka.getVari()));
+            pysahtyneetPalikat.add(new Palikka(pelipalikka.getX() + 40, pelipalikka.getY(), pelipalikka.getVari()));
+            pysahtyneetPalikat.add(new Palikka(pelipalikka.getX() + 20, pelipalikka.getY() - 20, pelipalikka.getVari()));
+        }
+        if (pelipalikka.getMuoto().equals("KOLMIO2")) {
+            pysahtyneetPalikat.add(new Palikka(pelipalikka.getX(), pelipalikka.getY() - 20, pelipalikka.getVari()));
+            pysahtyneetPalikat.add(new Palikka(pelipalikka.getX() + 20, pelipalikka.getY(), pelipalikka.getVari()));
+            pysahtyneetPalikat.add(new Palikka(pelipalikka.getX() + 20, pelipalikka.getY() - 20, pelipalikka.getVari()));
+            pysahtyneetPalikat.add(new Palikka(pelipalikka.getX() + 20, pelipalikka.getY() - 40, pelipalikka.getVari()));
+        }
+        if (pelipalikka.getMuoto().equals("KOLMIO3")) {
+            pysahtyneetPalikat.add(new Palikka(pelipalikka.getX(), pelipalikka.getY() - 20, pelipalikka.getVari()));
+            pysahtyneetPalikat.add(new Palikka(pelipalikka.getX() + 20, pelipalikka.getY(), pelipalikka.getVari()));
+            pysahtyneetPalikat.add(new Palikka(pelipalikka.getX() + 20, pelipalikka.getY() - 20, pelipalikka.getVari()));
+            pysahtyneetPalikat.add(new Palikka(pelipalikka.getX() + 40, pelipalikka.getY() - 20, pelipalikka.getVari()));
+        }
+        if (pelipalikka.getMuoto().equals("KOLMIO4")) {
+            pysahtyneetPalikat.add(new Palikka(pelipalikka.getX(), pelipalikka.getY(), pelipalikka.getVari()));
+            pysahtyneetPalikat.add(new Palikka(pelipalikka.getX(), pelipalikka.getY() - 20, pelipalikka.getVari()));
+            pysahtyneetPalikat.add(new Palikka(pelipalikka.getX(), pelipalikka.getY() - 40, pelipalikka.getVari()));
+            pysahtyneetPalikat.add(new Palikka(pelipalikka.getX() + 20, pelipalikka.getY() - 20, pelipalikka.getVari()));
         }
     }
 
@@ -284,21 +302,27 @@ public class Maailma {
         }
         if (pelipalikka.getMuoto().equals("KOLMIO")) {
             lista.add(new Palikka(pelipalikka.getX(), pelipalikka.getY(), pelipalikka.getVari()));
-            lista.add(new Palikka(pelipalikka.getX(), pelipalikka.getY() + 20, pelipalikka.getVari()));
-            lista.add(new Palikka(pelipalikka.getX() + 20, pelipalikka.getY() + 20, pelipalikka.getVari()));
-            lista.add(new Palikka(pelipalikka.getX() - 20, pelipalikka.getY() + 20, pelipalikka.getVari()));
+            lista.add(new Palikka(pelipalikka.getX() + 20, pelipalikka.getY(), pelipalikka.getVari()));
+            lista.add(new Palikka(pelipalikka.getX() + 40, pelipalikka.getY(), pelipalikka.getVari()));
+            lista.add(new Palikka(pelipalikka.getX() + 20, pelipalikka.getY() - 20, pelipalikka.getVari()));
         }
-        if (pelipalikka.getMuoto().equals("KOLMIO0000")) {
-            lista.add(new Palikka(pelipalikka.getX(), pelipalikka.getY(), pelipalikka.getVari()));
-            lista.add(new Palikka(pelipalikka.getX(), pelipalikka.getY(), pelipalikka.getVari()));
-            lista.add(new Palikka(pelipalikka.getX(), pelipalikka.getY(), pelipalikka.getVari()));
-            lista.add(new Palikka(pelipalikka.getX(), pelipalikka.getY(), pelipalikka.getVari()));
+        if (pelipalikka.getMuoto().equals("KOLMIO2")) {
+            lista.add(new Palikka(pelipalikka.getX(), pelipalikka.getY() - 20, pelipalikka.getVari()));
+            lista.add(new Palikka(pelipalikka.getX() + 20, pelipalikka.getY(), pelipalikka.getVari()));
+            lista.add(new Palikka(pelipalikka.getX() + 20, pelipalikka.getY() - 20, pelipalikka.getVari()));
+            lista.add(new Palikka(pelipalikka.getX() + 20, pelipalikka.getY() - 40, pelipalikka.getVari()));
         }
-        if (pelipalikka.getMuoto().equals("KOLMIO0000")) {
+        if (pelipalikka.getMuoto().equals("KOLMIO3")) {
+            lista.add(new Palikka(pelipalikka.getX(), pelipalikka.getY() - 20, pelipalikka.getVari()));
+            lista.add(new Palikka(pelipalikka.getX() + 20, pelipalikka.getY(), pelipalikka.getVari()));
+            lista.add(new Palikka(pelipalikka.getX() + 20, pelipalikka.getY() - 20, pelipalikka.getVari()));
+            lista.add(new Palikka(pelipalikka.getX() + 40, pelipalikka.getY() - 20, pelipalikka.getVari()));
+        }
+        if (pelipalikka.getMuoto().equals("KOLMIO4")) {
             lista.add(new Palikka(pelipalikka.getX(), pelipalikka.getY(), pelipalikka.getVari()));
-            lista.add(new Palikka(pelipalikka.getX(), pelipalikka.getY(), pelipalikka.getVari()));
-            lista.add(new Palikka(pelipalikka.getX(), pelipalikka.getY(), pelipalikka.getVari()));
-            lista.add(new Palikka(pelipalikka.getX(), pelipalikka.getY(), pelipalikka.getVari()));
+            lista.add(new Palikka(pelipalikka.getX(), pelipalikka.getY() - 20, pelipalikka.getVari()));
+            lista.add(new Palikka(pelipalikka.getX(), pelipalikka.getY() - 40, pelipalikka.getVari()));
+            lista.add(new Palikka(pelipalikka.getX() + 20, pelipalikka.getY() - 20, pelipalikka.getVari()));
         }
 
         return lista;
@@ -357,8 +381,7 @@ public class Maailma {
      */
     public void seuraavaMuoto() {
         Random r = new Random();
-        int luku = r.nextInt(3);
-//        luku = 4;
+        int luku = r.nextInt(4);
         if (luku == 2) {
             seuraavaMuoto = "NELIO";
         }
@@ -368,9 +391,9 @@ public class Maailma {
         if (luku == 0) {
             seuraavaMuoto = "SUORA";
         }
-//        if (luku == 4) {
-//            seuraavaMuoto = "KOLMIO";
-//        }
+        if (luku == 3) {
+            seuraavaMuoto = "KOLMIO";
+        }
     }
 
     public void setMuoto() {
