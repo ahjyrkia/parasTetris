@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 /*
- * Pelipalikan kertoo kaiken liikutettavasta palikasta. Koordinaatit ja muodon. 
- * Täällä tapahtuu myös liikkumisen viimeinen vaihe.
+ * Pelipalikka-luokka kertoo kaiken liikutettavasta palikasta. Koordinaatit, värin ja muodon. 
+ * Myös muutama pelin lisäominaisuuksista on usutettu tänne. Kuten gameover- ja pause-toiminnalisuudet.
  */
 public class Pelipalikka {
 

@@ -5,8 +5,17 @@ import tetris.maailma.Pelipalikka;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import tetris.maailma.Palikka;
 
@@ -17,6 +26,7 @@ public class Ikkuna extends JPanel {
 
     private ArrayList<Palikka> pysahtyneetPalikat;
     private Pelipalikka pelipalikka;
+    private int tiedostonkirjoitusapumuuttuja = 0;
 
     public Ikkuna(Maailma maailma) {
         super.setBackground(Color.BLACK);
@@ -94,23 +104,52 @@ public class Ikkuna extends JPanel {
             g.setFont(new Font("TimesRoman", Font.PLAIN, 25));
             g.setColor(Color.white);
             g.drawString("PRESS P TO CONTINUE ", 40, 200);
+            if (tiedostonkirjoitusapumuuttuja == 0) {
+                scorenTalletus();
+            }
+        }
+
+        try {
+            FileReader lukija = new FileReader("tiedosto.txt");
+            Scanner sc = new Scanner(lukija);
+            int y = 380;
+            ArrayList<Integer> scoret = new ArrayList<Integer>();
+            while (sc.hasNextLine()) {
+                scoret.add(Integer.parseInt(sc.nextLine()));
+            }
+            Collections.reverse(scoret);
+            for (int i = 0; i < 5; i++) {
+                g.setFont(new Font("TimesRoman", Font.PLAIN, 10));
+                g.setColor(Color.white);
+                g.drawString("" + scoret.get(i), 480, y);
+                y += 10;
+
+            }
+
+            sc.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Ikkuna.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
+
     /**
      * Päivittää pysähtyneiden palikoiden listan.
-     * @param palikat 
+     *
+     * @param palikat
      */
     public void paivitaPalikat(ArrayList palikat) {
         pysahtyneetPalikat = palikat;
     }
+
     /**
      * Piirtää SUORA-muotoisen palikan. Parametreina tulee väri ja koordinaatit.
      * Sama logiikka muissa palikoiden piirtämis-metodeissa.
+     *
      * @param g
      * @param vari
      * @param x
-     * @param y 
+     * @param y
      */
     public void piirraSUORA(Graphics g, Color vari, int x, int y) {
         g.setColor(vari);
@@ -167,11 +206,13 @@ public class Ikkuna extends JPanel {
         g.fillRect(x, y - 40, 20, 20);
         g.fillRect(x, y - 60, 20, 20);
     }
+
     /**
      * Piirtää ruudun info-puolelle seuraavan palikan "next:" tekstin viereen.
+     *
      * @param g
      * @param muoto
-     * @param vari 
+     * @param vari
      */
     private void piirraSeuraavaPalikka(Graphics g, String muoto, Color vari) {
         if (muoto.equals("SUORA")) {
@@ -184,4 +225,20 @@ public class Ikkuna extends JPanel {
             piirraNELIO(g, vari, 500, 185);
         }
     }
+
+    private void scorenTalletus() {
+
+        try {
+            tiedostonkirjoitusapumuuttuja++;
+            String filename = "tiedosto.txt";
+            FileWriter fw = new FileWriter(filename, true);
+            fw.write(pelipalikka.getScore() + "\n");
+            fw.close();
+
+        } catch (IOException ex) {
+            Logger.getLogger(Ikkuna.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }
