@@ -349,7 +349,19 @@ public class Maailma {
                 i = 500;
             }
         }
-        score += 200 * pisteytys;
+        if (pisteytys > 3) {
+            score += 400 * pisteytys;
+        }
+        if (pisteytys == 3) {
+            score += 300 * pisteytys;
+        }
+        if (pisteytys == 2) {
+            score += 200 * pisteytys;
+        }
+        if (pisteytys == 1) {
+            score += 100 * pisteytys;
+        }
+
         pelipalikka.setScore(score);
     }
 
